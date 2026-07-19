@@ -1,12 +1,23 @@
 services:
   redis:
-    image: redis:latest
+    image: redis:8.8-alpine
+    container_name: redis
     ports:
       - 6379:6379
     volumes:
       - redis-data:/data
     restart: unless-stopped
+  
+  rabbit:
+    image: rabbitmq:4.3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
 
 volumes:
   redis-data:
     driver: local
+  rabbitmq-data:
